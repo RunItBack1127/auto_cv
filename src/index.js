@@ -3,7 +3,6 @@ const express = require('express');
 const puppeteer  = require('puppeteer');
 const path = require('path');
 
-const CHROME_PATH = path.resolve('C:/Program Files (x86)/Google/Chrome/Application/chrome.exe');
 const SERVER_PORT = 3455;
 const PDF_SERVER = express();
 
@@ -261,7 +260,6 @@ PDF_SERVER.get("/generate", (req, res) => {
 
     async function generatePDF() {
         const browser = await puppeteer.launch({
-            executablePath: CHROME_PATH,
             headless: true,
             args: [
                 '--font-render-hinting=medium'
