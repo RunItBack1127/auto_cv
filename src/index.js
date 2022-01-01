@@ -262,7 +262,8 @@ PDF_SERVER.get("/generate", (req, res) => {
         const browser = await puppeteer.launch({
             headless: true,
             args: [
-                '--font-render-hinting=medium'
+                '--font-render-hinting=medium',
+                '--no-sandbox'
             ]
         });
 
