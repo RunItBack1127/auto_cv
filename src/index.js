@@ -276,11 +276,12 @@ PDF_SERVER.get("/generate", (req, res) => {
 
         await page.pdf({
             format: 'letter',
-            path: path.join(__dirname, 'Weston_P_Greene_Cover_Letter.pdf')
+            path: path.join(__dirname, 'cover-letter.pdf')
         });
 
         res.setHeader('Content-Type', 'application/pdf');
-        res.sendFile(path.join(__dirname, 'Weston_P_Greene_Cover_Letter.pdf'), (error) => {});
+        res.setHeader('Content-Disposition', 'attachment; filename="Weston_P_Greene_Cover_Letter.pdf"');
+        res.sendFile(path.join(__dirname, 'cover-letter.pdf'), (error) => {});
 
         await browser.close();
     }
