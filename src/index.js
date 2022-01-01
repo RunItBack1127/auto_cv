@@ -6,9 +6,9 @@ const path = require('path');
 const SERVER_PORT = 8921;
 const PDF_SERVER = express();
 
-PDF_SERVER.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
-});
+// PDF_SERVER.get("/", (req, res) => {
+//     res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 PDF_SERVER.get("/generate", (req, res) => {
     const PDF_CONTENTS = `
