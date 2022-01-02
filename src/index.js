@@ -2,13 +2,12 @@ const fs = require('fs');
 const express = require('express');
 const puppeteer  = require('puppeteer');
 const path = require('path');
+const cors = require('cors');
 
 const SERVER_PORT = 8921;
 const PDF_SERVER = express();
 
-// PDF_SERVER.get("/", (req, res) => {
-//     res.sendFile(path.join(__dirname, "index.html"));
-// });
+PDF_SERVER.use(cors());
 
 PDF_SERVER.get("/generate", (req, res) => {
     const PDF_CONTENTS = `
