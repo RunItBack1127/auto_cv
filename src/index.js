@@ -8,8 +8,11 @@ const SERVER_PORT = 8921;
 const PDF_SERVER = express();
 
 PDF_SERVER.use((req, res, next) => {
-    cors();
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
     res.append('Access-Control-Expose-Headers', 'Content-Disposition');
+    next();
 });
 
 PDF_SERVER.get("/generate", (req, res) => {
