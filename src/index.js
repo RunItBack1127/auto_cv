@@ -7,15 +7,11 @@ const cors = require('cors');
 const SERVER_PORT = 8921;
 const PDF_SERVER = express();
 
-PDF_SERVER.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
-    res.append('Access-Control-Expose-Headers', 'Content-Disposition');
-    next();
-});
+PDF_SERVER.use(cors());
 
 PDF_SERVER.get("/generate", (req, res) => {
+    res.append('Access-Control-Expose-Headers', 'Content-Disposition');
+
     const PDF_CONTENTS = `
     <!DOCTYPE html>
     <html xmlns="http://www.w3.org/1999/xhtml"><head>
