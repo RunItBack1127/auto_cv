@@ -7,7 +7,10 @@ const cors = require('cors');
 const SERVER_PORT = 8921;
 const PDF_SERVER = express();
 
-PDF_SERVER.use(cors());
+PDF_SERVER.use((req, res, next) => {
+    cors();
+    res.append('Access-Control-Expose-Headers', 'Content-Disposition');
+});
 
 PDF_SERVER.get("/generate", (req, res) => {
     const PDF_CONTENTS = `
