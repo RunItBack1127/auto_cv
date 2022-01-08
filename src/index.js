@@ -9,13 +9,15 @@ const PDF_SERVER = express();
 
 PDF_SERVER.use(cors());
 
-let BROWSER = await puppeteer.launch({
-	headless: true,
-	args: [
-		'--font-render-hinting=medium',
-		'--no-sandbox'
-	]
-});
+(async() => {
+	let BROWSER = await puppeteer.launch({
+		headless: true,
+		args: [
+			'--font-render-hinting=medium',
+			'--no-sandbox'
+		]
+	});
+})();
 
 PDF_SERVER.get("/generate", (req, res) => {
     res.append('Access-Control-Expose-Headers', 'Content-Disposition');
