@@ -9,8 +9,9 @@ const PDF_SERVER = express();
 
 PDF_SERVER.use(cors());
 
+let BROWSER;
 (async() => {
-	let BROWSER = await puppeteer.launch({
+	BROWSER = await puppeteer.launch({
 		headless: true,
 		args: [
 			'--font-render-hinting=medium',
