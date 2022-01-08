@@ -9,6 +9,14 @@ const PDF_SERVER = express();
 
 PDF_SERVER.use(cors());
 
+let BROWSER = await puppeteer.launch({
+	headless: true,
+	args: [
+		'--font-render-hinting=medium',
+		'--no-sandbox'
+	]
+});
+
 PDF_SERVER.get("/generate", (req, res) => {
     res.append('Access-Control-Expose-Headers', 'Content-Disposition');
 
@@ -260,15 +268,7 @@ PDF_SERVER.get("/generate", (req, res) => {
     fs.writeFile('cover-letter.html', PDF_CONTENTS, (error, success) => {});
 
     async function generatePDF() {
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: [
-                '--font-render-hinting=medium',
-                '--no-sandbox'
-            ]
-        });
-
-        const page = await browser.newPage();
+        const page = await BROWSER.newPage();
         const pageHTML = fs.readFileSync('cover-letter.html', 'utf-8');
         await page.setContent(pageHTML, {
             waitUntil: 'domcontentloaded'
@@ -283,7 +283,7 @@ PDF_SERVER.get("/generate", (req, res) => {
         res.setHeader('Content-Disposition', 'attachment; filename="Weston_P_Greene_Cover_Letter.pdf"');
         res.sendFile(path.join(__dirname, 'cover-letter.pdf'), (error) => {});
 
-        await browser.close();
+        // await BROWSER.close();
     }
     generatePDF();
 });
