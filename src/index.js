@@ -14,7 +14,7 @@ let BROWSER;
 	BROWSER = await puppeteer.launch({
 		headless: true,
 		args: [
-			'--font-render-hinting=medium',
+			'--font-render-hinting=none',
 			'--no-sandbox'
 		]
 	});
